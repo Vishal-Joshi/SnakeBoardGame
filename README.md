@@ -6,6 +6,8 @@ The board Configuration are as follows-
 
 The board used for reference is can be referred from here https://www.google.co.in/search?q=snakeboard&espv=2&biw=1366&bih=656&source=lnms&tbm=isch&sa=X&ei=h07mVLOFEMy9ugTB6IH4DA&ved=0CAYQ_AUoAQ#tbm=isch&q=snake+And+Ladder&spell=1&imgdii=_&imgrc=vmpWDJh4ErNjrM%253A%3BuH17MvwKiXa3MM%3Bhttp%253A%252F%252Fwww.codewithc.com%252Fwp-content%252Fuploads%252F2014%252F05%252Fsnakes-and-ladders.jpg%3Bhttp%253A%252F%252Fwww.codewithc.com%252Fsnakes-and-ladders-game-project-c%252F%3B1283%3B1285
 
+You can play the game in AutoPlay mode by running the AutoGamePlayer.java
+
 
 Its an initial draft of the game which currently resides in my head in the way I used to play in my
 childhood :) Please don't mind if I was breaking some rules!
