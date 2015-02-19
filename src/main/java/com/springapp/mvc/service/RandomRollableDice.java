@@ -11,6 +11,8 @@ import java.util.Random;
 @Service
 public class RandomRollableDice implements RollableDice {
     private Random randomNumberGenerator = new Random();
+    private static final int MIN_NUMBER = 1;
+    private static final int MAX_NUMBER = 6;
 
     @Override
     public int rollDice(){
@@ -18,7 +20,7 @@ public class RandomRollableDice implements RollableDice {
         boolean isValueZero = false;
         int diceResult = 0;
         do {
-            diceResult = randomNumberGenerator.nextInt(6);
+            diceResult = randomNumberGenerator.nextInt(MAX_NUMBER - MIN_NUMBER + 1) + MIN_NUMBER;
             if(diceResult == 0){
                 isValueZero = true;
             }
