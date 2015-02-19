@@ -3,7 +3,7 @@ package com.springapp.mvc;
 import java.util.List;
 
 /**
- * Created by root on 19/2/15.
+ * Created by Vishal Joshi on 19/2/15.
  */
 public class SnakeBoard {
 
@@ -17,5 +17,9 @@ public class SnakeBoard {
 
     public List<Ladder> getLadders() {
         return ladders;
+    }
+
+    public List<Snake> getSnakes() {
+        return snakes;
     }
 }

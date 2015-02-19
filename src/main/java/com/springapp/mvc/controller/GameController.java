@@ -2,13 +2,14 @@ package com.springapp.mvc.controller;
 
 import com.springapp.mvc.Ladder;
 import com.springapp.mvc.Player;
+import com.springapp.mvc.Snake;
 import com.springapp.mvc.service.PlayerService;
 import com.springapp.mvc.service.RollableDice;
 import com.springapp.mvc.service.SnakeBoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- * Created by root on 19/2/15.
+ * Created by Vishal Joshi on 19/2/15.
  */
 public class GameController {
 
@@ -30,6 +31,9 @@ public class GameController {
         if(snakeBoardService.isLadder(player.getCurrentPosition())){
             Ladder ladder = snakeBoardService.getLadder(player.getCurrentPosition());
             player.move(ladder.getEndStep()-ladder.getStartStep());
+        } else if(snakeBoardService.isSnake(player.getCurrentPosition())) {
+            Snake snake = snakeBoardService.getSnake(player.getCurrentPosition());
+            player.move(snake.getTail() - snake.getMouth());
         }
     }
 }

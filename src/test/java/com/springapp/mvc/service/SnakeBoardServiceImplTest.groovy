@@ -7,7 +7,7 @@ import org.gmock.WithGMock
 import org.junit.Test
 
 /**
- * Created by root on 19/2/15.
+ * Created by Vishal Joshi on 19/2/15.
  */
 @WithGMock
 class SnakeBoardServiceImplTest {
@@ -92,6 +92,86 @@ class SnakeBoardServiceImplTest {
             ladder = snakeBoardService.getLadder(stepNumber)
         }
         assert ladder == null
+    }
 
+    @Test
+    public void testShouldReturnTrueIfSnakeExistsOnTheParticularStep(){
+        List<Ladder> ladders = null
+        def mouthForSnake1 = 30
+        def tailForSnake1 = 11
+        Snake snakeFrom30to11 = new Snake(mouthForSnake1, tailForSnake1)
+        int mouthForSnake2 = 99
+        int tailForSnake2 = 6
+        Snake snakeFrom98To6 = new Snake(mouthForSnake2, tailForSnake2)
+        List<Snake> snakes = [snakeFrom30to11,snakeFrom98To6]
+        def snakeBoard = new SnakeBoard(snakes, ladders)
+        SnakeBoardService snakeBoardService = new SnakeBoardServiceImpl(snakeBoard)
+        def stepNumber = 30
+        boolean isSnake
+        play{
+            isSnake = snakeBoardService.isSnake(stepNumber)
+        }
+        assert isSnake == true
+    }
+
+    @Test
+    public void testShouldReturnFalseIfSnakeDoesNotExistsOnTheParticularStep(){
+        List<Ladder> ladders = null
+        def mouthForSnake1 = 30
+        def tailForSnake1 = 11
+        Snake snakeFrom30to11 = new Snake(mouthForSnake1, tailForSnake1)
+        int mouthForSnake2 = 99
+        int tailForSnake2 = 6
+        Snake snakeFrom98To6 = new Snake(mouthForSnake2, tailForSnake2)
+        List<Snake> snakes = [snakeFrom30to11,snakeFrom98To6]
+        def snakeBoard = new SnakeBoard(snakes, ladders)
+        SnakeBoardService snakeBoardService = new SnakeBoardServiceImpl(snakeBoard)
+        def stepNumber = 32
+        boolean isSnake
+        play{
+            isSnake = snakeBoardService.isSnake(stepNumber)
+        }
+        assert isSnake == false
+    }
+
+    @Test
+    public void testShouldReturnTheSnakeIfSnakeExistsOnTheParticularStep(){
+        List<Ladder> ladders = null
+        def mouthForSnake1 = 30
+        def tailForSnake1 = 11
+        Snake snakeFrom30to11 = new Snake(mouthForSnake1, tailForSnake1)
+        int mouthForSnake2 = 99
+        int tailForSnake2 = 6
+        Snake snakeFrom98To6 = new Snake(mouthForSnake2, tailForSnake2)
+        List<Snake> snakes = [snakeFrom30to11,snakeFrom98To6]
+        def snakeBoard = new SnakeBoard(snakes, ladders)
+        SnakeBoardService snakeBoardService = new SnakeBoardServiceImpl(snakeBoard)
+        def stepNumber = 30
+        Snake snake
+        play{
+            snake = snakeBoardService.getSnake(stepNumber)
+        }
+        assert snake != null
+        assert snake == snakeFrom30to11
+    }
+
+    @Test
+    public void testShouldReturnNULLIfNoSnakeExistsOnTheParticularStep(){
+        List<Ladder> ladders = null
+        def mouthForSnake1 = 30
+        def tailForSnake1 = 11
+        Snake snakeFrom30to11 = new Snake(mouthForSnake1, tailForSnake1)
+        int mouthForSnake2 = 99
+        int tailForSnake2 = 6
+        Snake snakeFrom98To6 = new Snake(mouthForSnake2, tailForSnake2)
+        List<Snake> snakes = [snakeFrom30to11,snakeFrom98To6]
+        def snakeBoard = new SnakeBoard(snakes, ladders)
+        SnakeBoardService snakeBoardService = new SnakeBoardServiceImpl(snakeBoard)
+        def stepNumber = 32
+        Snake snake
+        play{
+            snake = snakeBoardService.getSnake(stepNumber)
+        }
+        assert snake == null
     }
 }
