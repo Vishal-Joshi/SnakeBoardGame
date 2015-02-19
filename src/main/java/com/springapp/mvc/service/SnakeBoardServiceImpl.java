@@ -74,8 +74,10 @@ public class SnakeBoardServiceImpl implements SnakeBoardService {
         Ladder ladder = getLadder(step);
         Snake snake = getSnake(step);
         if (ladder != null){
+            System.out.println(String.format("A ladder with end step at %s found at %s: ",ladder.getEndStep(), step));
             return ladder;
         } else if(snake != null) {
+            System.out.println(String.format("A snake with tail at %s found at %s",snake.getTail(), step));
             return snake;
         }
         return null;

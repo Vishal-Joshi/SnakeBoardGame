@@ -25,9 +25,12 @@ public class GameController {
     public void play(){
         Player player = playerService.getPlayer();
         int numberOfSteps = rollableDice.rollDice();
+        System.out.println("Dice rolled to: "+numberOfSteps);
         int playersPositionAfterWalkingDice = player.getCurrentPosition() + numberOfSteps;
+        System.out.println("Players position after walking dice: "+playersPositionAfterWalkingDice);
         int destinationStep = snakeBoardService.getDestinationStep(playersPositionAfterWalkingDice);
         player.moveTo(destinationStep);
+        System.out.println("--final position of player is "+player.getCurrentPosition());
 
     }
 }
