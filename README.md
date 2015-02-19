@@ -1,4 +1,4 @@
-s is an implementation for the Snake Board Game which commonly known as "Snake and Ladder".
+This is an implementation for the Snake Board Game which commonly known as "Snake and Ladder".
 The board Configuration are as follows-
 # Its a board of 10 rows and 10 columns which makes it a 10*10 board
 # The board consists of 7 snakes and 7 ladders
