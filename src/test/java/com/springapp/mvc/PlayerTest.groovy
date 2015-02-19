@@ -16,7 +16,7 @@ public class PlayerTest {
         Player player = new Player(previousPosition, currentPosition)
         def numberOfSteps = 4
         play{
-            player.move(numberOfSteps)
+            player.moveBy(numberOfSteps)
         }
         assert player.currentPosition-player.previousPosition == numberOfSteps
     }
@@ -28,9 +28,21 @@ public class PlayerTest {
         Player player = new Player(previousPosition, currentPosition)
         def numberOfSteps = -4
         play{
-            player.move(numberOfSteps)
+            player.moveBy(numberOfSteps)
         }
         assert player.previousPosition-player.currentPosition == 4
+    }
+
+    @Test
+    public void testShouldAllowPlayerToParticularStep(){
+        def previousPosition = 1
+        def currentPosition = 6
+        Player player = new Player(previousPosition, currentPosition)
+        def newStep = 10
+        play{
+            player.moveTo(newStep)
+        }
+        assert player.currentPosition == newStep
     }
 
 }

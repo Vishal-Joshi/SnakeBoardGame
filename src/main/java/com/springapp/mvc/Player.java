@@ -21,9 +21,14 @@ public class Player {
         return currentPosition;
     }
 
-    public void move(final int numberOfSteps){
+    public void moveBy(final int numberOfSteps){
         this.previousPosition = this.currentPosition;
         this.currentPosition += numberOfSteps;
+    }
+
+    public void moveTo(final int step){
+        this.previousPosition = this.currentPosition;
+        this.currentPosition = step;
     }
 
 }

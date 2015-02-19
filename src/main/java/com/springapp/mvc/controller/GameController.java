@@ -1,8 +1,6 @@
 package com.springapp.mvc.controller;
 
-import com.springapp.mvc.Ladder;
 import com.springapp.mvc.Player;
-import com.springapp.mvc.Snake;
 import com.springapp.mvc.service.PlayerService;
 import com.springapp.mvc.service.RollableDice;
 import com.springapp.mvc.service.SnakeBoardService;
@@ -27,13 +25,9 @@ public class GameController {
     public void play(){
         Player player = playerService.getPlayer();
         int numberOfSteps = rollableDice.rollDice();
-        player.move(numberOfSteps);
-        if(snakeBoardService.isLadder(player.getCurrentPosition())){
-            Ladder ladder = snakeBoardService.getLadder(player.getCurrentPosition());
-            player.move(ladder.getEndStep()-ladder.getStartStep());
-        } else if(snakeBoardService.isSnake(player.getCurrentPosition())) {
-            Snake snake = snakeBoardService.getSnake(player.getCurrentPosition());
-            player.move(snake.getTail() - snake.getMouth());
-        }
+        int playersPositionAfterWalkingDice = player.getCurrentPosition() + numberOfSteps;
+        int destinationStep = snakeBoardService.getDestinationStep(playersPositionAfterWalkingDice);
+        player.moveTo(destinationStep);
+
     }
 }

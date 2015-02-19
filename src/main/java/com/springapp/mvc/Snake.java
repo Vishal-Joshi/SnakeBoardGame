@@ -3,7 +3,7 @@ package com.springapp.mvc;
 /**
  * Created by Vishal Joshi on 18/2/15.
  */
-public class Snake {
+public class Snake implements StepJumper {
 
     private int mouth;
     private int tail;
@@ -18,6 +18,11 @@ public class Snake {
     }
 
     public int getTail() {
+        return tail;
+    }
+
+    @Override
+    public int getDestinationStep() {
         return tail;
     }
 }

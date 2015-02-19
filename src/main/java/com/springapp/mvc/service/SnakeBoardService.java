@@ -16,4 +16,6 @@ public interface SnakeBoardService {
     boolean isSnake(int step);
 
     Snake getSnake(int step);
+
+    int getDestinationStep(int step);
 }

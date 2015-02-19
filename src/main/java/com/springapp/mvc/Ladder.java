@@ -3,7 +3,7 @@ package com.springapp.mvc;
 /**
  * Created by Vishal Joshi on 18/2/15.
  */
-public class Ladder {
+public class Ladder implements StepJumper {
     private int startStep;
     private int endStep;
 
@@ -18,6 +18,11 @@ public class Ladder {
     }
 
     public int getEndStep() {
+        return endStep;
+    }
+
+    @Override
+    public int getDestinationStep() {
         return endStep;
     }
 }

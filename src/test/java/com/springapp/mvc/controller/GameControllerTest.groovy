@@ -37,55 +37,13 @@ public class GameControllerTest {
         mockPlayerService.getPlayer() returns player
         mockRollableDice.rollDice() returns numberOfStepsToMove
         def newStepOfPlayerAfterMovingNumberOfStepsGivenByDice = previousPosition + numberOfStepsToMove
-        mockSnakeBoardService.isLadder(newStepOfPlayerAfterMovingNumberOfStepsGivenByDice) returns false
+        mockSnakeBoardService.getDestinationStep(newStepOfPlayerAfterMovingNumberOfStepsGivenByDice) returns newStepOfPlayerAfterMovingNumberOfStepsGivenByDice
         play{
             gameController.play()
         }
 
-        assert player.currentPosition-player.previousPosition == numberOfStepsToMove
-        assert player.currentPosition == previousPosition + numberOfStepsToMove
+        assert player.currentPosition-player.previousPosition ==  numberOfStepsToMove
+        assert player.currentPosition == newStepOfPlayerAfterMovingNumberOfStepsGivenByDice
     }
 
-    @Test
-    public void testShouldAllowPlayerToPlayDiceAndClimbLadder(){
-        def previousPosition = 1
-        def currentPosition = 1
-        def player = new Player(previousPosition, currentPosition)
-        def numberOfStepsToMove = 4
-        def newStepOfPlayerAfterMovingNumberOfStepsGivenByDice = previousPosition + numberOfStepsToMove
-        def endStepOfLadder = 30
-        int startStep = newStepOfPlayerAfterMovingNumberOfStepsGivenByDice
-        def ladder = new Ladder(startStep, endStepOfLadder)
-        mockPlayerService.getPlayer() returns player
-        mockRollableDice.rollDice() returns numberOfStepsToMove
-        mockSnakeBoardService.isLadder(newStepOfPlayerAfterMovingNumberOfStepsGivenByDice) returns true
-        mockSnakeBoardService.getLadder(newStepOfPlayerAfterMovingNumberOfStepsGivenByDice) returns ladder
-        play{
-            gameController.play()
-        }
-
-        assert player.currentPosition == ladder.endStep
-    }
-
-    @Test
-    public void testShouldAllowPlayerToPlayDiceAndFallToSnakedTailIfLandedOnSnakeStep(){
-        def previousPosition = 1
-        def currentPosition = 1
-        def player = new Player(previousPosition, currentPosition)
-        def numberOfStepsToMove = 4
-        def newStepOfPlayerAfterMovingNumberOfStepsGivenByDice = previousPosition + numberOfStepsToMove
-        def tail = 2
-        int mouth = newStepOfPlayerAfterMovingNumberOfStepsGivenByDice
-        def snake = new Snake(mouth, tail)
-        mockPlayerService.getPlayer() returns player
-        mockRollableDice.rollDice() returns numberOfStepsToMove
-        mockSnakeBoardService.isLadder(newStepOfPlayerAfterMovingNumberOfStepsGivenByDice) returns false
-        mockSnakeBoardService.isSnake(newStepOfPlayerAfterMovingNumberOfStepsGivenByDice) returns true
-        mockSnakeBoardService.getSnake(newStepOfPlayerAfterMovingNumberOfStepsGivenByDice) returns snake
-        play{
-            gameController.play()
-        }
-
-        assert player.currentPosition == tail
-    }
 }

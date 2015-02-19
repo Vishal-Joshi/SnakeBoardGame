@@ -3,7 +3,11 @@ package com.springapp.mvc.service;
 import com.springapp.mvc.Ladder;
 import com.springapp.mvc.Snake;
 import com.springapp.mvc.SnakeBoard;
+import com.springapp.mvc.StepJumper;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Service;
+
+import java.util.Collections;
 
 /**
  * Created by Vishal Joshi on 19/2/15.
@@ -28,9 +32,11 @@ public class SnakeBoardServiceImpl implements SnakeBoardService {
 
     @Override
     public Ladder getLadder(int step) {
-        for (Ladder ladder : snakeBoard.getLadders()) {
-            if(ladder.getStartStep() == step){
-                return ladder;
+        if(CollectionUtils.isNotEmpty(snakeBoard.getLadders())){
+            for (Ladder ladder : snakeBoard.getLadders()) {
+                if(ladder.getStartStep() == step){
+                    return ladder;
+                }
             }
         }
         return null;
@@ -48,10 +54,29 @@ public class SnakeBoardServiceImpl implements SnakeBoardService {
 
     @Override
     public Snake getSnake(int step) {
-        for (Snake snake : snakeBoard.getSnakes()) {
-            if(snake.getMouth() == step){
-                return snake;
+        if(CollectionUtils.isNotEmpty(snakeBoard.getSnakes())) {
+            for (Snake snake : snakeBoard.getSnakes()) {
+                if (snake.getMouth() == step) {
+                    return snake;
+                }
             }
+        }
+        return null;
+    }
+
+    @Override
+    public int getDestinationStep(int step) {
+        StepJumper snakeOrLadder = getStepJumperForTheStep(step);
+        return snakeOrLadder != null ? snakeOrLadder.getDestinationStep(): step;
+    }
+
+    private StepJumper getStepJumperForTheStep(int step){
+        Ladder ladder = getLadder(step);
+        Snake snake = getSnake(step);
+        if (ladder != null){
+            return ladder;
+        } else if(snake != null) {
+            return snake;
         }
         return null;
     }
